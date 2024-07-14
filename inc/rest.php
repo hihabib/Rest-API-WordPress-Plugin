@@ -18,7 +18,10 @@ function raw_register_rest_api()
         "callback" => "get_api_void_data",
         "args" => [
             "url" => [
-                "required" => true
+                "required" => true,
+                'validate_callback' => function ($param, $request, $key) {
+                    return is_string($param);
+                }
             ]
         ]
     ]);
