@@ -31,6 +31,7 @@ add_shortcode("API_VOID_VIEWS", function () {
             display: flex;
             flex-direction: column;
             gap: 20px;
+            margin-bottom: 60px;
         }
         #api-void input {
             width: 100%;
