@@ -120,13 +120,15 @@ add_shortcode("API_VOID_VIEWS", function () {
 
         const form = document.querySelector('#api-void');
         form.addEventListener("submit", async e => {
-
+            // clear previous tables and prevent default
             e.preventDefault();
-            const domain = e.target.domainSearch.value;
+            document.querySelector("#tableContainer").innerHTML = "";
+
             // add loading effect
             document.querySelector('#api-void input[type="submit"]').setAttribute("value", "Please Wait");
             document.querySelector('#api-void input[type="submit"]').setAttribute("disabled", "");
 
+            const domain = e.target.domainSearch.value;
             // call api
             const res = await fetch("https://reportscammedfunds.com/wp-json/raw/v1/api-void?url=" + domain);
             const result = await res.json();
