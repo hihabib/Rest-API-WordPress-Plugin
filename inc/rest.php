@@ -1,4 +1,9 @@
 <?php
+// if accessed directly
+if (!defined("ABSPATH")) {
+    exit;
+}
+
 require_once dirname(__DIR__) . "/api/api-void.php";
 
 add_action("rest_api_init", "raw_register_rest_api");
@@ -10,6 +15,11 @@ function raw_register_rest_api()
 {
     register_rest_route("raw/v1", "/api-void", [
         "methods" => "GET",
-        "callback" => "get_api_void_data"
+        "callback" => "get_api_void_data",
+        "args" => [
+            "url" => [
+                "required" => true
+            ]
+        ]
     ]);
 }
