@@ -1,0 +1,19 @@
+<?php
+/**
+ * Plugin Name: Rest API WP - RAW
+ * Description: Custom Plugin to create Rest API
+ * Version: 1.0.0
+ * Author: Habibul Islam
+ */
+
+// Exit If accessed directly
+if (!defined('ABSPATH')) {
+    exit;
+}
+
+// Plugin Constants
+define("IS_DEV", false);
+define("RAW_VERSION", IS_DEV ? time() : "1.0.0");
+define("RAW_PLUGIN_DIR", __DIR__);
+
+require_once __DIR__ . "/inc/rest.php";
