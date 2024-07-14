@@ -125,7 +125,7 @@ add_shortcode("API_VOID_VIEWS", function () {
                 createTable("URL Parts", result?.data?.report?.url_parts ?? {});
                 createTable("Web Page", result?.data?.report?.web_page ?? {});
             } else {
-                createTable(result.error, result.error ?? {});
+                createTable(result.error, result ?? {});
             }
         });
     </script>
