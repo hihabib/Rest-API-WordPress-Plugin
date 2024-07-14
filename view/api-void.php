@@ -32,12 +32,17 @@ add_shortcode("API_VOID_VIEWS", function () {
             display: flex;
             flex-direction: column;
             gap: 20px;
-            margin-bottom: 60px;
+            margin: 40px 0;
         }
 
         #api-void input {
             width: 100%;
             padding: 20px 10px;
+        }
+
+        #api-void input[disabled], #api-void input[disabled]:hover {
+            background: lightgray;
+            cursor: not-allowed;
         }
     </style>
     <form id="api-void" action="<?php the_permalink(); ?>">
@@ -102,21 +107,32 @@ add_shortcode("API_VOID_VIEWS", function () {
             }
 
             container.appendChild(table);
-            document.querySelector("#tableContainer #pleaseWait")?.remove();
+            // remove loading effect
+            if (document.querySelector('#api-void input[type="submit"]').value !== "Search") {
+                document.querySelector('#api-void input[type="submit"]').setAttribute("value", "Search");
+                document.querySelector('#api-void input[type="submit"]').removeAttribute("disabled");
+            }
+
+            // add table
             document.querySelector("#tableContainer").appendChild(container);
         }
 
 
         const form = document.querySelector('#api-void');
         form.addEventListener("submit", async e => {
+
             e.preventDefault();
             const domain = e.target.domainSearch.value;
-            document.querySelector("#tableContainer").innerHTML = '<h3 id="pleaseWait">Please wait..</h3>'
+            // add loading effect
+            document.querySelector('#api-void input[type="submit"]').setAttribute("value", "Please Wait");
+            document.querySelector('#api-void input[type="submit"]').setAttribute("disabled");
+
+            // call api
             const res = await fetch("https://reportscammedfunds.com/wp-json/raw/v1/api-void?url=" + domain);
             const result = await res.json();
 
             // create tables
-            if(result.error === undefined){
+            if (result.error === undefined) {
                 createTable("Domain Age", result?.data?.report?.domain_age ?? {});
                 createTable("DNS Records - NS", result?.data?.report?.dns_records?.ns?.records ?? {});
                 createTable("DNS Records - MX", result?.data?.report?.dns_records?.mx?.records ?? {});
