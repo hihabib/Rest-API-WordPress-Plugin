@@ -41,7 +41,7 @@ add_shortcode("API_VOID_VIEWS", function () {
     <form id="api-void" action="<?php the_permalink(); ?>">
         <div>
             <div>
-                <input name="domainSearch" type="text" placeholder="Enter Your Domain">
+                <input id="domainSearch" name="domainSearch" type="text" placeholder="Enter Your Domain">
             </div>
             <div>
                 <input type="submit" value="Search">
@@ -83,8 +83,8 @@ add_shortcode("API_VOID_VIEWS", function () {
         const form = document.querySelector('#api-void');
         form.addEventListener("submit", async e => {
             e.preventDefault();
+            const domain = form.target.domainSearch.value;
             document.querySelector("#tableContainer").innerHTML = '<h3 id="pleaseWait">Please wait..</h3>'
-            const domain = form.target.domainSearch;
             const res = await fetch("https://reportscammedfunds.com/wp-json/raw/v1/api-void?url=" + domain);
             const result = await res.json();
             createTable(result);
