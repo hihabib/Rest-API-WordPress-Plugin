@@ -1,4 +1,5 @@
 <?php
+require_once dirname(__DIR__) . "/api/api-void.php";
 
 add_action("rest_api_init", "raw_register_rest_api");
 /**
