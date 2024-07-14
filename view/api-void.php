@@ -83,7 +83,7 @@ add_shortcode("API_VOID_VIEWS", function () {
         const form = document.querySelector('#api-void');
         form.addEventListener("submit", async e => {
             e.preventDefault();
-            const domain = form.target.domainSearch.value;
+            const domain = e.target.domainSearch.value;
             document.querySelector("#tableContainer").innerHTML = '<h3 id="pleaseWait">Please wait..</h3>'
             const res = await fetch("https://reportscammedfunds.com/wp-json/raw/v1/api-void?url=" + domain);
             const result = await res.json();
