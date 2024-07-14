@@ -80,7 +80,7 @@ add_shortcode("API_VOID_VIEWS", function () {
             });
 
             container.appendChild(table);
-            document.querySelector("#tableContainer #pleaseWait").remove();
+            document.querySelector("#tableContainer #pleaseWait")?.remove();
             document.querySelector("#tableContainer").appendChild(container);
         }
 
