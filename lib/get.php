@@ -11,5 +11,5 @@ function make_get_request($endpoint)
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
     $output = curl_exec($curl);
     curl_close($curl);
-    return $output;
+    return json_decode($output, true);
 }
