@@ -19,3 +19,4 @@ define("RAW_VERSION", IS_DEV ? time() : "1.0.0");
 define("RAW_PLUGIN_DIR", __DIR__);
 
 require_once __DIR__ . "/inc/rest.php";
+require_once __DIR__ . "/view/api-void.php";
