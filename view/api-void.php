@@ -27,12 +27,14 @@ add_shortcode("API_VOID_VIEWS", function () {
         tr:nth-child(even) {
             background-color: #f9f9f9;
         }
+
         #api-void > div {
             display: flex;
             flex-direction: column;
             gap: 20px;
             margin-bottom: 60px;
         }
+
         #api-void input {
             width: 100%;
             padding: 20px 10px;
@@ -65,19 +67,39 @@ add_shortcode("API_VOID_VIEWS", function () {
             container.appendChild(heading);
 
             const table = document.createElement('table');
-            Object.keys(data).forEach(key => {
-                const row = document.createElement('tr');
+            // Check if data is an array or object
+            if (Array.isArray(data)) {
+                data.forEach((item, index) => {
+                    Object.keys(item).forEach(key => {
+                        const row = document.createElement('tr');
 
-                const cellKey = document.createElement('th');
-                cellKey.textContent = key;
-                row.appendChild(cellKey);
+                        const cellKey = document.createElement('th');
+                        cellKey.textContent = key;
+                        row.appendChild(cellKey);
 
-                const cellValue = document.createElement('td');
-                cellValue.textContent = JSON.stringify(data[key], null, 2);
-                row.appendChild(cellValue);
+                        const cellValue = document.createElement('td');
+                        cellValue.textContent = item[key];
+                        row.appendChild(cellValue);
 
-                table.appendChild(row);
-            });
+                        table.appendChild(row);
+                    });
+                });
+            } else {
+                Object.keys(data).forEach(key => {
+                    const row = document.createElement('tr');
+
+                    const cellKey = document.createElement('th');
+                    cellKey.textContent = key;
+                    row.appendChild(cellKey);
+
+                    const cellValue = document.createElement('td');
+                    cellValue.textContent = JSON.stringify(data[key], null, 2);
+                    row.appendChild(cellValue);
+
+                    table.appendChild(row);
+                });
+
+            }
 
             container.appendChild(table);
             document.querySelector("#tableContainer #pleaseWait")?.remove();
