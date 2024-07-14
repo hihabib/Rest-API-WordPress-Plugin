@@ -1,9 +1,11 @@
 <?php
 /**
- * Plugin Name: Rest API WP - RAW
- * Description: Custom Plugin to create Rest API
- * Version: 1.0.0
- * Author: Habibul Islam
+ * Plugin Name:        Rest API WP - RAW
+ * Description:        Custom Plugin to create Rest API
+ * Version:            1.0.0
+ * Author:             Habibul Islam
+ *  License:           GPL v2 or later
+ *  License URI:       https://www.gnu.org/licenses/gpl-2.0.html
  */
 
 // Exit If accessed directly
