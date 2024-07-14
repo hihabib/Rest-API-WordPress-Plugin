@@ -55,10 +55,15 @@ add_shortcode("API_VOID_VIEWS", function () {
     <script>
         /**
          * Create Table
+         * @param title
          * @param data
          */
-        function createTable(data) {
+        function createTable(title, data) {
             const container = document.createElement('div');
+            const heading = document.createElement('h2');
+            heading.textContent = title;
+            container.appendChild(heading);
+
             const table = document.createElement('table');
             Object.keys(data).forEach(key => {
                 const row = document.createElement('tr');
@@ -87,7 +92,13 @@ add_shortcode("API_VOID_VIEWS", function () {
             document.querySelector("#tableContainer").innerHTML = '<h3 id="pleaseWait">Please wait..</h3>'
             const res = await fetch("https://reportscammedfunds.com/wp-json/raw/v1/api-void?url=" + domain);
             const result = await res.json();
-            createTable(result);
+            createTable("Domain Age", result?.data?.report?.domain_age ?? {});
+            createTable("DNS Records - NS", result?.data?.report?.dns_records?.ns?.records ?? {});
+            createTable("DNS Records - MX", result?.data?.report?.dns_records?.mx?.records ?? {});
+            createTable("Security Checks", result?.data?.report?.security_checks ?? {});
+            createTable("Server Details", result?.data?.report?.server_details ?? {});
+            createTable("URL Parts", result?.data?.report?.url_parts ?? {});
+            createTable("Web Page", result?.data?.report?.web_page ?? {});
         });
     </script>
     <?php
